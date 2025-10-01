@@ -1,0 +1,98 @@
+[
+  {
+    "id": "p01",
+    "name": "Vestido Sakura",
+    "price": 120000,
+    "currency": "COP",
+    "sizes": ["S", "M", "L"],
+    "images": ["/assets/sakura-1.jpg", "/assets/sakura-2.jpg"],
+    "stock": 8,
+    "category": "Vestidos",
+    "color": "Rosado Pastel",
+    "description": "Vestido inspirado en flores de cerezo, tela ligera y elegante. Perfecto para ocasiones especiales con un toque romántico asiático."
+  },
+  {
+    "id": "p02",
+    "name": "Blusa Nube",
+    "price": 65000,
+    "currency": "COP",
+    "sizes": ["XS", "S", "M"],
+    "images": ["/assets/nube-1.jpg", "/assets/nube-2.jpg"],
+    "stock": 12,
+    "category": "Blusas",
+    "color": "Blanco",
+    "description": "Blusa delicada con detalles de encaje. Diseño minimalista inspirado en las nubes del cielo asiático."
+  },
+  {
+    "id": "p03",
+    "name": "Falda Luna",
+    "price": 85000,
+    "currency": "COP",
+    "sizes": ["S", "M", "L", "XL"],
+    "images": ["/assets/luna-1.jpg", "/assets/luna-2.jpg"],
+    "stock": 15,
+    "category": "Faldas",
+    "color": "Negro",
+    "description": "Falda elegante con corte A, inspirada en la serenidad de la luna. Ideal para looks sofisticados."
+  },
+  {
+    "id": "p04",
+    "name": "Kimono Flor",
+    "price": 150000,
+    "currency": "COP",
+    "sizes": ["S", "M", "L"],
+    "images": ["/assets/kimono-1.jpg", "/assets/kimono-2.jpg"],
+    "stock": 6,
+    "category": "Kimonos",
+    "color": "Rosado Pastel",
+    "description": "Kimono tradicional con estampado floral. Pieza única que combina tradición y modernidad."
+  },
+  {
+    "id": "p05",
+    "name": "Vestido Jardín",
+    "price": 95000,
+    "currency": "COP",
+    "sizes": ["XS", "S", "M", "L"],
+    "images": ["/assets/jardin-1.jpg", "/assets/jardin-2.jpg"],
+    "stock": 10,
+    "category": "Vestidos",
+    "color": "Verde Pastel",
+    "description": "Vestido midi con estampado floral inspirado en jardines japoneses. Comodidad y elegancia en una sola prenda."
+  },
+  {
+    "id": "p06",
+    "name": "Blusa Cerezo",
+    "price": 70000,
+    "currency": "COP",
+    "sizes": ["S", "M", "L"],
+    "images": ["/assets/cerezo-1.jpg", "/assets/cerezo-2.jpg"],
+    "stock": 8,
+    "category": "Blusas",
+    "color": "Rosa",
+    "description": "Blusa con bordados delicados de flores de cerezo. Perfecta para looks casuales con un toque especial."
+  },
+  {
+    "id": "p07",
+    "name": "Falda Mariposa",
+    "price": 75000,
+    "currency": "COP",
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "images": ["/assets/mariposa-1.jpg", "/assets/mariposa-2.jpg"],
+    "stock": 14,
+    "category": "Faldas",
+    "color": "Azul Pastel",
+    "description": "Falda plisada con estampado de mariposas. Movimiento y gracia en cada paso."
+  },
+  {
+    "id": "p08",
+    "name": "Conjunto Harmony",
+    "price": 180000,
+    "currency": "COP",
+    "sizes": ["S", "M", "L"],
+    "images": ["/assets/harmony-1.jpg", "/assets/harmony-2.jpg"],
+    "stock": 5,
+    "category": "Conjuntos",
+    "color": "Beige",
+    "description": "Conjunto de dos piezas que representa la armonía perfecta. Blusa y falda coordinadas para looks completos."
+  }
+]
