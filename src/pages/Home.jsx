@@ -205,7 +205,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           {/* Layout Split - Texto a la izquierda, Cards a la derecha */}
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
+          
             {/* Lado Izquierdo - Texto Principal */}
             <motion.div variants={itemVariants} className="space-y-8">
               <div className="flex items-start space-x-4">
@@ -247,7 +247,7 @@ const Home = () => {
             </motion.div>
 
             {/* Lado Derecho - Grid de Cards Verticales */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="flex flex-col gap-2 space-y-6">
               
               {/* Card Misión */}
               <motion.div 
@@ -320,7 +320,7 @@ const Home = () => {
         <div className="absolute top-40 left-20 w-40 h-40 bg-pink-200/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-40 right-20 w-32 h-32 bg-purple-200/15 rounded-full blur-2xl"></div>
         
-        <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col gap-5 max-w-7xl mx-auto">
           
           {/* Header Centrado */}
           <motion.div variants={itemVariants} className="text-center mb-20">
@@ -346,7 +346,7 @@ const Home = () => {
           </motion.div>
 
           {/* Layout Zigzag - Sakura (Izquierda) */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-40">
             <motion.div 
               variants={itemVariants}
               className="relative"
@@ -377,10 +377,10 @@ const Home = () => {
 
             <motion.div 
               variants={itemVariants}
-              className="space-y-8"
+              className="space-y-12"
             >
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-16 bg-gradient-to-b from-pink-400 to-pink-600 rounded-full"></div>
+              <div className="flex items-center space-x-4 gap-2">
+                <div className="w-2 h-24 bg-gradient-to-b from-pink-400 to-pink-600 rounded-full"></div>
                 <div>
                   <h4 className="text-2xl font-display font-bold text-gray-800 mb-2">Primavera Elegante</h4>
                   <p className="text-gray-600 leading-relaxed max-w-md">
@@ -394,7 +394,7 @@ const Home = () => {
                 whileHover={{ x: 10 }}
                 className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100/50"
               >
-                <div className="flex items-center space-x-3 mb-3">
+                <div className="flex gap-2 items-center space-x-3 mb-3">
                   <div className="w-8 h-8 bg-pink-400 rounded-lg flex items-center justify-center">
                     <HiStar className="h-4 w-4 text-white" />
                   </div>
@@ -408,13 +408,13 @@ const Home = () => {
           </div>
 
           {/* Layout Zigzag - Mariposa (Derecha) */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-40">
             <motion.div 
               variants={itemVariants}
-              className="space-y-8 lg:order-2"
+              className="space-y-12 lg:order-2"
             >
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-16 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full"></div>
+              <div className="flex items-center space-x-4 gap-2">
+                <div className="w-2 h-24 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full"></div>
                 <div>
                   <h4 className="text-2xl font-display font-bold text-gray-800 mb-2">Transformación Natural</h4>
                   <p className="text-gray-600 leading-relaxed max-w-md">
@@ -428,7 +428,7 @@ const Home = () => {
                 whileHover={{ x: -10 }}
                 className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-purple-100/50"
               >
-                <div className="flex items-center space-x-3 mb-3">
+                <div className="flex gap-2 items-center space-x-3 mb-3">
                   <div className="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center">
                     <HiHeart className="h-4 w-4 text-white" />
                   </div>
@@ -501,10 +501,10 @@ const Home = () => {
 
             <motion.div 
               variants={itemVariants}
-              className="space-y-8"
+              className="space-y-12"
             >
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-16 bg-gradient-to-b from-emerald-400 to-teal-600 rounded-full"></div>
+              <div className="flex items-center space-x-4 gap-2">
+                <div className="w-2 h-24 bg-gradient-to-b from-emerald-400 to-teal-600 rounded-full"></div>
                 <div>
                   <h4 className="text-2xl font-display font-bold text-gray-800 mb-2">Armonía Verde</h4>
                   <p className="text-gray-600 leading-relaxed max-w-md">
@@ -518,7 +518,7 @@ const Home = () => {
                 whileHover={{ x: 10 }}
                 className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-100/50"
               >
-                <div className="flex items-center space-x-3 mb-3">
+                <div className="flex gap-2 items-center space-x-3 mb-3">
                   <div className="w-8 h-8 bg-emerald-400 rounded-lg flex items-center justify-center">
                     <HiSparkles className="h-4 w-4 text-white" />
                   </div>
