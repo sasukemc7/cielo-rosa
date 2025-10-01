@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiFilter, HiX, HiShoppingBag, HiEye, HiChevronDown } from 'react-icons/hi';
+import { HiFilter, HiX, HiShoppingBag, HiEye, HiChevronDown, HiHeart } from 'react-icons/hi';
 import { useCart } from '../context/CartContext';
 import productsData from '../data/products.json';
 
@@ -12,10 +12,35 @@ const Products = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showColorMenu, setShowColorMenu] = useState(false);
   const [showSizeMenu, setShowSizeMenu] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const { addToCart } = useCart();
 
-  // Obtener categorías únicas
-  const categories = ['Todos', ...new Set(productsData.map(p => p.category))];
+  // Cargar favoritos del localStorage al inicializar
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('cieloRosaFavorites');
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+  }, []);
+
+  // Función para agregar/quitar favoritos
+  const toggleFavorite = (productId, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const newFavorites = favorites.includes(productId)
+      ? favorites.filter(id => id !== productId)
+      : [...favorites, productId];
+    
+    setFavorites(newFavorites);
+    localStorage.setItem('cieloRosaFavorites', JSON.stringify(newFavorites));
+  };
+
+  // Verificar si un producto está en favoritos
+  const isFavorite = (productId) => favorites.includes(productId);
+
+  // Obtener categorías únicas (incluyendo Favoritos)
+  const categories = ['Todos', 'Favoritos', ...new Set(productsData.map(p => p.category))];
   
   // Obtener colores únicos
   const colors = [...new Set(productsData.map(p => p.color))];
@@ -26,13 +51,22 @@ const Products = () => {
   // Filtrar productos
   const filteredProducts = useMemo(() => {
     return productsData.filter(product => {
-      const categoryMatch = selectedCategory === 'Todos' || product.category === selectedCategory;
+      // Filtro por categorías
+      let categoryMatch;
+      if (selectedCategory === 'Todos') {
+        categoryMatch = true;
+      } else if (selectedCategory === 'Favoritos') {
+        categoryMatch = favorites.includes(product.id);
+      } else {
+        categoryMatch = product.category === selectedCategory;
+      }
+      
       const colorMatch = !selectedColor || product.color === selectedColor;
       const sizeMatch = !selectedSize || product.sizes.includes(selectedSize);
       
       return categoryMatch && colorMatch && sizeMatch;
     });
-  }, [selectedCategory, selectedColor, selectedSize]);
+  }, [selectedCategory, selectedColor, selectedSize, favorites]);
 
   // Función para obtener el color de los círculos de filtro
   const getColorClass = (color) => {
@@ -75,7 +109,7 @@ const Products = () => {
   };
 
   const activeFiltersCount = 
-    (selectedCategory !== 'Todos' ? 1 : 0) + 
+    (selectedCategory !== 'Todos' && selectedCategory !== 'Favoritos' ? 1 : 0) + 
     (selectedColor ? 1 : 0) + 
     (selectedSize ? 1 : 0);
 
@@ -323,72 +357,140 @@ const Products = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ y: -5 }}
-                    className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="bg-gradient-to-br from-white via-pink-50/20 to-purple-50/10 rounded-2xl shadow-lg border border-pink-100/50 overflow-hidden group backdrop-blur-sm"
                   >
-                    <Link to={`/producto/${product.id}`}>
-                      {/* Imagen del producto */}
-                      <div className="relative h-64 bg-gray-100 overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
-                          <div className="text-center">
-                            <div className="text-4xl mb-2">
-                              {product.category === 'Vestidos' && '👗'}
-                              {product.category === 'Blusas' && '👚'}
-                              {product.category === 'Faldas' && '🩱'}
-                              {product.category === 'Kimonos' && '🥻'}
-                              {product.category === 'Conjuntos' && '👔'}
-                            </div>
-                            <p className="text-sm text-pink-700 font-medium">{product.name}</p>
-                          </div>
-                        </div>
-                        
-                        {/* Overlay con acciones */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                          <div className="bg-white p-2 rounded-full text-gray-700 hover:text-pink-600 transition-colors">
-                            <HiEye className="h-5 w-5" />
-                          </div>
-                        </div>
-
-                        {/* Badge de stock bajo */}
-                        {product.stock <= 5 && (
-                          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                            ¡Solo {product.stock}!
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Información del producto */}
-                      <div className="p-4">
-                        <h3 className="font-semibold text-gray-800 mb-1 group-hover:text-pink-600 transition-colors">
-                          {product.name}
-                        </h3>
-                        <p className="text-sm text-gray-500 mb-2">{product.category} • {product.color}</p>
-                        <p className="text-xl font-bold text-pink-600 mb-3">
-                          ${product.price.toLocaleString()} {product.currency}
-                        </p>
-                        
-                        {/* Tallas disponibles */}
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {product.sizes.map(size => (
-                            <span
-                              key={size}
-                              className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
-                            >
-                              {size}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Botón agregar al carrito */}
-                        <button
-                          onClick={(e) => handleAddToCart(product, e)}
-                          className="w-full bg-pink-50 text-pink-600 py-2 rounded-lg font-medium hover:bg-pink-100 transition-colors flex items-center justify-center gap-2"
+                    <div className="relative">
+                      
+                      {/* Botón de favoritos - Posición fija */}
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => toggleFavorite(product.id, e)}
+                        className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full border-2 backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
+                          isFavorite(product.id)
+                            ? 'bg-pink-500 border-pink-500 text-white shadow-lg shadow-pink-500/25'
+                            : 'bg-white/80 border-white/60 text-gray-400 hover:text-pink-500 hover:border-pink-300'
+                        }`}
+                      >
+                        <motion.div
+                          animate={isFavorite(product.id) ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                          transition={{ duration: 0.3 }}
                         >
-                          <HiShoppingBag className="h-4 w-4" />
-                          Agregar al carrito
-                        </button>
+                          <HiHeart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                        </motion.div>
+                      </motion.button>
+
+                      <Link to={`/producto/${product.id}`}>
+                        {/* Imagen del producto mejorada */}
+                        <div className="relative h-72 bg-gradient-to-br from-pink-100/60 to-purple-100/40 overflow-hidden">
+                          <div className="w-full h-full flex items-center justify-center relative">
+                            
+                            {/* Elementos decorativos de fondo */}
+                            <div className="absolute top-8 left-8 w-12 h-12 bg-pink-200/30 rounded-full blur-xl"></div>
+                            <div className="absolute bottom-8 right-8 w-16 h-16 bg-purple-200/20 rounded-full blur-2xl"></div>
+                            
+                            <div className="text-center relative z-10">
+                              <motion.div
+                                whileHover={{ 
+                                  scale: 1.1,
+                                  rotate: [0, -5, 5, 0] 
+                                }}
+                                transition={{ duration: 0.6 }}
+                                className="text-6xl mb-4 filter drop-shadow-lg"
+                              >
+                                {product.category === 'Vestidos' && '👗'}
+                                {product.category === 'Blusas' && '👚'}
+                                {product.category === 'Faldas' && '🩱'}
+                                {product.category === 'Kimonos' && '🥻'}
+                                {product.category === 'Conjuntos' && '👔'}
+                              </motion.div>
+                              <p className="text-sm text-pink-700 font-semibold tracking-wide">{product.name}</p>
+                            </div>
+                          </div>
+                          
+                          {/* Overlay con acciones mejorado */}
+                          <motion.div 
+                            initial={{ opacity: 0 }}
+                            whileHover={{ opacity: 1 }}
+                            className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-center justify-center"
+                          >
+                            <motion.div
+                              initial={{ y: 20, opacity: 0 }}
+                              whileHover={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.1 }}
+                              className="bg-white/90 backdrop-blur-sm p-3 rounded-full text-gray-700 hover:text-pink-600 transition-colors shadow-lg"
+                            >
+                              <HiEye className="h-6 w-6" />
+                            </motion.div>
+                          </motion.div>
+
+                          {/* Badge de stock bajo mejorado */}
+                          {product.stock <= 5 && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-2 rounded-full shadow-lg"
+                            >
+                              ¡Solo {product.stock}!
+                            </motion.div>
+                          )}
+                        </div>
+
+                        {/* Información del producto mejorada */}
+                        <div className="p-6">
+                          <div className="mb-4">
+                            <h3 className="font-bold text-lg text-gray-800 mb-2 group-hover:text-pink-600 transition-colors leading-tight">
+                              {product.name}
+                            </h3>
+                            <div className="flex items-center space-x-2 text-sm text-gray-500 mb-3">
+                              <span className="bg-gray-100 px-2 py-1 rounded-full">{product.category}</span>
+                              <span>•</span>
+                              <div className="flex items-center space-x-1">
+                                <div className={`w-3 h-3 rounded-full border ${getColorClass(product.color)}`}></div>
+                                <span>{product.color}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-baseline space-x-2 mb-4">
+                              <span className="text-2xl font-bold text-pink-600">
+                                ${product.price.toLocaleString()}
+                              </span>
+                              <span className="text-sm text-gray-500 font-medium">{product.currency}</span>
+                            </div>
+                          </div>
+                          
+                          {/* Tallas disponibles mejoradas */}
+                          <div className="mb-4">
+                            <p className="text-xs font-medium text-gray-600 mb-2">Tallas disponibles:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {product.sizes.map(size => (
+                                <span
+                                  key={size}
+                                  className="text-xs bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 px-3 py-1 rounded-full font-medium border border-gray-200"
+                                >
+                                  {size}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+
+                      {/* Botones de acción mejorados */}
+                      <div className="px-6 pb-6">
+                        <div className="flex gap-3">
+                          <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={(e) => handleAddToCart(product, e)}
+                            className="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-pink-500/25"
+                          >
+                            <HiShoppingBag className="h-4 w-4" />
+                            Agregar al carrito
+                          </motion.button>
+                        </div>
                       </div>
-                    </Link>
+                    </div>
                   </motion.div>
                 ))}
               </AnimatePresence>
