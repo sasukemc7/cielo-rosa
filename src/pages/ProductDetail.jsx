@@ -449,7 +449,7 @@ const ProductDetail = () => {
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 bg-clip-text text-transparent bg-300% animate-gradient"
+                  className="bg-gradient-to-r from-pink-300  to-pink-400 bg-clip-text text-transparent bg-300% animate-gradient"
                 >
                   {product.name}
                 </motion.span>
