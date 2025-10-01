@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CartProvider } from './context/CartContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -12,7 +13,8 @@ import Footer from './components/Footer';
 function App() {
   return (
     <CartProvider>
-      <Router>
+      <FavoritesProvider>
+        <Router>
         <div className="min-h-screen bg-pink-50 w-full mx-auto">
           {/* Navbar */}
           <Navbar />
@@ -56,7 +58,8 @@ function App() {
           <Footer />
 
         </div>
-      </Router>
+        </Router>
+      </FavoritesProvider>
     </CartProvider>
   );
 }

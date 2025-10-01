@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { HiArrowLeft, HiShoppingBag, HiHeart, HiShare, HiChevronLeft, HiChevronRight, HiSparkles, HiStar, HiCheck, HiTruck, HiShieldCheck } from 'react-icons/hi';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import productsData from '../data/products.json';
 
 const ProductDetail = () => {
@@ -13,13 +14,13 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
+  const { toggleFavorite, isFavorite: checkIsFavorite } = useFavorites();
 
   // Animación de entrada de la página
   useEffect(() => {
@@ -30,6 +31,9 @@ const ProductDetail = () => {
   const product = useMemo(() => {
     return productsData.find(p => p.id === id);
   }, [id]);
+
+  // Verificar si este producto está en favoritos
+  const isProductFavorite = product ? checkIsFavorite(product.id) : false;
 
   // Productos relacionados (misma categoría, excluyendo el actual)
   const relatedProducts = useMemo(() => {
@@ -82,8 +86,9 @@ const ProductDetail = () => {
     setTimeout(() => setShowSuccessMessage(false), 3000);
   };
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  // Función para manejar favoritos
+  const handleToggleFavorite = () => {
+    toggleFavorite(product.id);
   };
 
   const nextImage = () => {
@@ -431,7 +436,7 @@ const ProductDetail = () => {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col gap-2 space-y-4 space-y-10"
+            className="space-y-10"
           >
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -789,24 +794,24 @@ const ProductDetail = () => {
                 className="flex gap-4"
               >
                 <button
-                  onClick={toggleFavorite}
+                  onClick={handleToggleFavorite}
                   className={`flex-1 py-4 px-6 border-2 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-3 ${
-                    isFavorite
+                    isProductFavorite
                       ? 'border-pink-300 bg-gradient-to-r from-pink-50 to-rose-50 text-pink-600 shadow-lg shadow-pink-300/20'
                       : 'border-pink-200 bg-white text-gray-700 hover:border-pink-400 hover:bg-pink-50 shadow-md'
                   }`}
                 >
                   <motion.div
-                    animate={isFavorite ? { 
+                    animate={isProductFavorite ? { 
                       scale: [1, 1.3, 1],
                       rotate: [0, 10, -10, 0]
                     } : { scale: 1 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <HiHeart className={`h-5 w-5 ${isFavorite ? 'fill-current text-red-500' : ''}`} />
+                    <HiHeart className={`h-5 w-5 ${isProductFavorite ? 'fill-current text-pink-500' : ''}`} />
                   </motion.div>
-                  <span>{isFavorite ? '💕 En Favoritos' : '🤍 Favoritos'}</span>
-                  {isFavorite && (
+                  <span>{isProductFavorite ? '💕 En Favoritos' : '🤍 Favoritos'}</span>
+                  {isProductFavorite && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}

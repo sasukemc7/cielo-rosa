@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiFilter, HiX, HiShoppingBag, HiEye, HiChevronDown, HiHeart } from 'react-icons/hi';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 import productsData from '../data/products.json';
 
 const Products = () => {
@@ -12,32 +13,15 @@ const Products = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showColorMenu, setShowColorMenu] = useState(false);
   const [showSizeMenu, setShowSizeMenu] = useState(false);
-  const [favorites, setFavorites] = useState([]);
   const { addToCart } = useCart();
+  const { favorites, toggleFavorite, isFavorite } = useFavorites();
 
-  // Cargar favoritos del localStorage al inicializar
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('cieloRosaFavorites');
-    if (savedFavorites) {
-      setFavorites(JSON.parse(savedFavorites));
-    }
-  }, []);
-
-  // Función para agregar/quitar favoritos
-  const toggleFavorite = (productId, e) => {
+  // Función para manejar favoritos con prevención de eventos
+  const handleToggleFavorite = (productId, e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    const newFavorites = favorites.includes(productId)
-      ? favorites.filter(id => id !== productId)
-      : [...favorites, productId];
-    
-    setFavorites(newFavorites);
-    localStorage.setItem('cieloRosaFavorites', JSON.stringify(newFavorites));
+    toggleFavorite(productId);
   };
-
-  // Verificar si un producto está en favoritos
-  const isFavorite = (productId) => favorites.includes(productId);
 
   // Obtener categorías únicas (incluyendo Favoritos)
   const categories = ['Todos', 'Favoritos', ...new Set(productsData.map(p => p.category))];
@@ -366,7 +350,7 @@ const Products = () => {
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        onClick={(e) => toggleFavorite(product.id, e)}
+                        onClick={(e) => handleToggleFavorite(product.id, e)}
                         className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full border-2 backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
                           isFavorite(product.id)
                             ? 'bg-pink-500 border-pink-500 text-white shadow-lg shadow-pink-500/25'
