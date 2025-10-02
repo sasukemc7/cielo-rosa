@@ -6,8 +6,10 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import AboutUs from './pages/AboutUs';
 import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
+import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 
 function App() {
@@ -28,29 +30,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Products />} />
+              <Route path="/nosotros" element={<AboutUs />} />
               <Route path="/producto/:id" element={<ProductDetail />} />
               <Route path="/carrito" element={<CartPage />} />
               
               {/* Ruta 404 */}
-              <Route path="*" element={
-                <div className="min-h-screen flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🌸</div>
-                    <h1 className="text-3xl font-display font-bold text-gray-800 mb-4">
-                      Página no encontrada
-                    </h1>
-                    <p className="text-gray-600 mb-6">
-                      La página que buscas no existe o ha sido movida.
-                    </p>
-                    <a
-                      href="/"
-                      className="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition-colors font-medium"
-                    >
-                      Volver al inicio
-                    </a>
-                  </div>
-                </div>
-              } />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </motion.main>
           
