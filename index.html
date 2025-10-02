@@ -1,12 +1,135 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    
+    <!-- Viewport y compatibilidad -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cielo Rosa - Tienda de Ropa</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- SEO Principal -->
+    <title>Cielo Rosa - Tienda de Ropa Femenina Online | Moda Elegante y Moderna</title>
+    <meta name="description" content="Descubre la colección más elegante de ropa femenina en Cielo Rosa. Vestidos, blusas, faldas y conjuntos únicos que combinan tendencias actuales con comodidad y calidad. ✨ Envío gratis en compras superiores a $100.000" />
+    <meta name="keywords" content="ropa femenina, tienda online, vestidos, blusas, faldas, moda mujer, ropa elegante, Cielo Rosa, fashion, tendencias, conjuntos" />
+    <meta name="author" content="Cielo Rosa - Simón Durán, Maria Fernanda Alfonso, Salome Zuluaga" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ec4899" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cielo Rosa - Tienda de Ropa Femenina Online" />
+    <meta property="og:description" content="Descubre la colección más elegante de ropa femenina. Vestidos, blusas, faldas y conjuntos únicos con envío gratis en compras superiores a $100.000" />
+    <meta property="og:image" content="/public/preview/preview.png" />
+    <meta property="og:url" content="https://cielo-rosa.netlify.app" />
+    <meta property="og:site_name" content="Cielo Rosa" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cielo Rosa - Tienda de Ropa Femenina Online" />
+    <meta name="twitter:description" content="Descubre la colección más elegante de ropa femenina. Vestidos, blusas, faldas y conjuntos únicos." />
+    <meta name="twitter:image" content="/public/preview/preview.png" />
+    <meta name="twitter:creator" content="@cielorosa" />
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    
+    <!-- PWA -->
+    <meta name="application-name" content="Cielo Rosa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Cielo Rosa" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Cielo Rosa",
+      "description": "Tienda online de ropa femenina elegante y moderna",
+      "url": "https://cielo-rosa.netlify.app",
+      "logo": "https://cielo-rosa.netlify.app/logo.png",
+      "image": "https://cielo-rosa.netlify.app/public/preview/preview.png",
+      "founder": [
+        {
+          "@type": "Person",
+          "name": "Simón Durán"
+        },
+        {
+          "@type": "Person", 
+          "name": "Maria Fernanda Alfonso"
+        },
+        {
+          "@type": "Person",
+          "name": "Salome Zuluaga"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Ropa Femenina",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Vestidos",
+              "category": "Ropa Femenina"
+            }
+          },
+          {
+            "@type": "Offer", 
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Blusas",
+              "category": "Ropa Femenina"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product", 
+              "name": "Faldas",
+              "category": "Ropa Femenina"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Conjuntos", 
+              "category": "Ropa Femenina"
+            }
+          }
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CO"
+      },
+      "currenciesAccepted": "COP",
+      "paymentAccepted": "Credit Card, Debit Card",
+      "priceRange": "$$"
+    }
+    </script>
   </head>
   <body class="m-0 p-0">
+    <!-- Loading fallback -->
+    <noscript>
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui; text-align: center; background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 100%);">
+        <div>
+          <h1 style="color: #ec4899; margin-bottom: 1rem;">🌸 Cielo Rosa</h1>
+          <p style="color: #6b7280;">Para una mejor experiencia, por favor habilita JavaScript en tu navegador.</p>
+        </div>
+      </div>
+    </noscript>
+    
     <div id="root" class="w-full min-h-screen mx-auto"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
