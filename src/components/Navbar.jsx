@@ -1,8 +1,14 @@
+// Imports
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Icons
 import { HiMenu, HiX, HiHome, HiSparkles } from 'react-icons/hi'
 import { MdStorefront, MdShoppingCart } from 'react-icons/md';
+import { IoPersonSharp } from "react-icons/io5";
+
+// Cart
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
@@ -32,7 +38,7 @@ const Navbar = () => {
       id: 'about',
       path: '/nosotros',
       label: 'Sobre Nosotros',
-      icon: MdStorefront
+      icon: IoPersonSharp
     }
   ];
 
