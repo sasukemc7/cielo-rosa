@@ -110,7 +110,7 @@ const ProductDetail = () => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: pageLoaded ? 1 : 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.1 }}
       className="min-h-screen bg-gradient-to-br from-pink-50/30 via-white to-purple-50/20 relative overflow-hidden"
     >
       {/* Elementos decorativos de fondo */}
@@ -134,7 +134,7 @@ const ProductDetail = () => {
           >
             <motion.div
               animate={{ rotate: [0, 360] }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.3 }}
             >
               <HiCheck className="h-6 w-6" />
             </motion.div>
@@ -149,11 +149,11 @@ const ProductDetail = () => {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
           className="flex items-center gap-4 mb-8"
         >
-          <motion.button
-            onClick={() => navigate(-1)}
+          <Link
+            to="/productos"
             whileHover={{ scale: 1.05, x: -5 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 text-gray-600 hover:text-pink-600 transition-all duration-300 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg hover:shadow-xl"
@@ -165,7 +165,7 @@ const ProductDetail = () => {
               <HiArrowLeft className="h-5 w-5" />
             </motion.div>
             <span className="font-medium">Volver</span>
-          </motion.button>
+          </Link>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -183,7 +183,7 @@ const ProductDetail = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.1, delay: 0.3 }}
           className="grid lg:grid-cols-2 gap-12"
         >
           
@@ -191,7 +191,7 @@ const ProductDetail = () => {
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.1, delay: 0.5 }}
             className="flex flex-col gap-2 space-y-4"
           >
             {/* Imagen principal ÉPICA */}
@@ -204,7 +204,7 @@ const ProductDetail = () => {
                 initial={{ scale: 0.8, opacity: 0, rotateY: 90 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                 exit={{ scale: 0.8, opacity: 0, rotateY: -90 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
+                transition={{ duration: 0.1, ease: "easeInOut" }}
                 className="aspect-square bg-gradient-to-br from-pink-100/60 via-pink-50/40 to-purple-100/30 flex items-center justify-center relative overflow-hidden"
               >
                 {/* Elementos decorativos flotantes */}
@@ -304,7 +304,7 @@ const ProductDetail = () => {
                     y: [-25, -65, -25],
                     opacity: [0.3, 0.7, 0.3]
                   }}
-                  transition={{ duration: 3.5, repeat: Infinity, delay: 2.5 }}
+                  transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
                   className="absolute bottom-1/4 left-1/3 text-pink-300 text-lg"
                 >
                   🌟
@@ -530,7 +530,7 @@ const ProductDetail = () => {
               <motion.h3
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.9 }}
+                transition={{ duration: 0.1, delay: 0.9 }}
                 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"
               >
                 <motion.span
@@ -561,7 +561,7 @@ const ProductDetail = () => {
               <motion.h3
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 1.2 }}
+                transition={{ duration: 0.1, delay: 1.2 }}
                 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"
               >
                 <motion.span
@@ -569,7 +569,7 @@ const ProductDetail = () => {
                     scale: [1, 1.2, 1],
                     rotate: [0, 10, -10, 0] 
                   }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 2.5 }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                 >
                   📏
                 </motion.span>
@@ -623,7 +623,7 @@ const ProductDetail = () => {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.6 }}
+              transition={{ duration: 0.1, delay: 1.6 }}
               className="flex items-center gap-3 bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-pink-100/50 shadow-sm"
             >
               <motion.div
@@ -806,7 +806,7 @@ const ProductDetail = () => {
                       scale: [1, 1.3, 1],
                       rotate: [0, 10, -10, 0]
                     } : { scale: 1 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <HiHeart className={`h-5 w-5 ${isProductFavorite ? 'fill-current text-pink-500' : ''}`} />
                   </motion.div>
@@ -846,7 +846,7 @@ const ProductDetail = () => {
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 2.3 }}
+                transition={{ duration: 0.1, delay: 2.3 }}
                 className="flex items-center gap-4 p-5 bg-green-50 rounded-xl border border-green-200 shadow-sm"
               >
                 <motion.div
@@ -865,7 +865,7 @@ const ProductDetail = () => {
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 2.4 }}
+                transition={{ duration: 0.1, delay: 2.4 }}
                 className="flex items-center gap-4 p-5 bg-blue-50 rounded-xl border border-blue-200 shadow-sm"
               >
                 <motion.div
@@ -884,7 +884,7 @@ const ProductDetail = () => {
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 2.5 }}
+                transition={{ duration: 0.1, delay: 0.5 }}
                 className="flex items-center gap-4 p-5 bg-pink-50 rounded-xl border border-pink-200 shadow-sm"
               >
                 <motion.div
@@ -910,9 +910,9 @@ const ProductDetail = () => {
         {relatedProducts.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className="mt-16"
           >
             <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-800 mb-8 text-center">

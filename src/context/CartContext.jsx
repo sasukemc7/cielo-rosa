@@ -128,20 +128,35 @@ export const CartProvider = ({ children }) => {
 
   // Cargar carrito desde localStorage al inicializar
   useEffect(() => {
-    const savedCart = localStorage.getItem('cieloRosaCart');
-    if (savedCart) {
+    const loadCartFromStorage = () => {
       try {
-        const parsedCart = JSON.parse(savedCart);
-        dispatch({ type: CART_ACTIONS.LOAD_CART, payload: parsedCart });
+        const savedCart = localStorage.getItem('cieloRosaCart');
+        if (savedCart && savedCart !== 'undefined' && savedCart !== 'null') {
+          const parsedCart = JSON.parse(savedCart);
+          if (Array.isArray(parsedCart) && parsedCart.length > 0) {
+            console.log('Cargando carrito desde localStorage:', parsedCart);
+            dispatch({ type: CART_ACTIONS.LOAD_CART, payload: parsedCart });
+          }
+        }
       } catch (error) {
         console.error('Error al cargar el carrito desde localStorage:', error);
+        // Si hay error, limpiar localStorage corrupto
+        localStorage.removeItem('cieloRosaCart');
       }
-    }
+    };
+
+    loadCartFromStorage();
   }, []);
 
-  // Guardar carrito en localStorage cuando cambie
+  // Guardar carrito en localStorage cuando cambie (solo si hay items)
   useEffect(() => {
-    localStorage.setItem('cieloRosaCart', JSON.stringify(state.items));
+    try {
+      const cartData = JSON.stringify(state.items);
+      localStorage.setItem('cieloRosaCart', cartData);
+      console.log('Carrito guardado en localStorage:', state.items);
+    } catch (error) {
+      console.error('Error al guardar el carrito en localStorage:', error);
+    }
   }, [state.items]);
 
   // Funciones del carrito
@@ -168,6 +183,9 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     dispatch({ type: CART_ACTIONS.CLEAR_CART });
+    // Limpiar también el localStorage
+    localStorage.removeItem('cieloRosaCart');
+    console.log('Carrito limpiado completamente');
   };
 
   const getCartItemCount = () => {
