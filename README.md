@@ -170,6 +170,5 @@ Give a ⭐️ if this project helped you or if you liked it!
 ---
 
 <div align="center">
-  <p>Made with ❤️ by the Cielo Rosa team</p>
-  <p>🌸 Where fashion meets passion and elegance ✨</p>
+  <p>Made with ❤️ by Sasuke MC</p>
 </div>
